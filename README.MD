@@ -2,9 +2,9 @@
 # RAVE CLI
 > The easiest way to make and accept payments from customers anywhere in the world.
 
-<!-- [![NPM Version][npm-image]][npm-url]
+[![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url] -->
+[![Downloads Stats][npm-downloads]][npm-url]
 
 The Rave docs can be found [here](https://developer.flutterwave.com/docs). And the CLI docs can be found [here]()
 
@@ -95,8 +95,8 @@ Creating the app:
  mkdir rave-samples
  cd rave-samples
 
- # generate the needed app
- rave create --app appname
+ # generate the transfer app
+ rave create --app transfer
 
  # open the .env file and put in your ```Rave Sandbox``` public and secret keys
 
@@ -109,33 +109,132 @@ Creating the app:
  # start the frontend server
  cd frontend/public && live-server --port=3000
 ```
+Yay! You should have a sample transfer app all set up now. **A piece of advice: Check out the code to see how it was implemented.**
 
-## Release History
+## Creating a sample 3dsecure App
 
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1
-    * Work in progress
+The 3dsecure sample app shows you how to handle cards that are eligible for 3dsecure transactions. 
+
+3dsecure transactions require redirects back to your payment page after a successful transaction. As such, the 3dsecure sample app also shows you how to handle redirects back to your page.
+
+We have provided guides on the left of the served up HTML page for you to see 3dsecure transactions in action. We ```strongly recommend``` that you read up those instructions so as to be able to get the appropriate account details to use for the test; as well as other vital info.
+
+*Before you proceed, ensure you've created a [Pusher Account](https://pusher.com/)*
+
+Creating the app:
+
+```
+ # make a folder
+ mkdir rave-samples
+ cd rave-samples
+
+ # generate the needed app
+ rave create --app 3dsecure
+
+ # open the .env file and put in your ```Rave Sandbox``` public and secret keys together with your ```Pusher keys```
+
+ # install all the libraries needed
+ npm install
+
+ # start the node server
+ nodemon app.js
+
+ # start the frontend server
+ cd frontend/public && live-server --port=3000
+```
+Yay! You should have a sample 3dsecure app all set up now. **A piece of advice: Check out the code to see how it was implemented.**
+
+
+# IMPORTANT!
+
+**As a bonus, we also show you how to set up webhooks on your rave dashboard so as to get notified of successful transactions.** You can find more information here about [Rave and Webhooks](https://developer.flutterwave.com/v2.0//docs#webhooks).
+
+To see webhooks in action, follow the [Creating a sample 3dsecure App](#) steps above and then run the following commands.
+
+```
+ # in your generated 3dsecure sample app folder
+ rave init heroku
+
+ rave init git https://the-heroku-gitUrl-created-for-you (e.g https://3dsecureRave.git)
+
+```
+By now you should be seeing a heroku app url in your console. Copy it and then do the following.
+
+![Webhook](/webhooks.PNG)
+
+Now you can try to do a test from the HTML page and you will see the webhook response in your ```Console```.
+
+Webhooks are sent from Rave only when there is a **```successful```** transaction. They have to be setup in your dashboard as shown above. And they also require a secret key. 
+
+A secret key has been created for you in the ```.env``` file of the generated project. Just copy it and place it in the secret key field as shown above. **Do not forget to save your newly updated settings.**
+
+## Creating a sample Tokenized Card Charge App
+
+The sample tokenized charge app shows you how to carry out tokenized card charges with the help of our Node.js Sdk.
+
+We have provided guides on the left of the served up HTML page for you to see tokenized card charges in action. We ```strongly recommend``` that you read up those instructions so as to be able to get the appropriate card details to use for the test; as well as other vital info.
+
+Creating the app:
+
+```
+ # make a folder
+ mkdir rave-samples
+ cd rave-samples
+
+ # generate the transfer app
+ rave create --app tokenized
+
+ # open the .env file and put in your ```Rave Sandbox``` public and secret keys
+
+ # install all the libraries needed
+ npm install
+
+ # start the node server
+ nodemon app.js
+
+ # start the frontend server
+ cd frontend/public && live-server --port=3000
+```
+Yay! You should have a sample tokenized card charge app all set up now. **A piece of advice: Check out the code to see how it was implemented.**
+
+## Creating a sample Split Payment App
+
+The sample tokenized charge app shows you how to do split payments with the help of our Node.js Sdk.
+
+We have provided guides on the left of the served up HTML page for you to see split payments in action. We ```strongly recommend``` that you read up those instructions so as to be able to get the appropriate card details to use for the test; as well as other vital info.
+
+Creating the app:
+
+```
+ # make a folder
+ mkdir rave-samples
+ cd rave-samples
+
+ # generate the transfer app
+ rave create --app split
+
+ # open the .env file and put in your ```Rave Sandbox``` public and secret keys
+
+ # install all the libraries needed
+ npm install
+
+ # start the node server
+ nodemon app.js
+
+ # start the frontend server
+ cd frontend/public && live-server --port=3000
+```
+Yay! You should have a sample split payments app all set up now. **A piece of advice: Check out the code to see how it was implemented.**
 
 ## Meta
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+[Joshua Boateng](https://github.com/Jake-parkers/)
 
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
+1. Fork it (<https://github.com/Jake-parkers/rave-cli/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
