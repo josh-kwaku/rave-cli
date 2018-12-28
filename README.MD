@@ -30,11 +30,16 @@ The CLI and Rave itself are different. The CLI is just a helper to get you start
 
 ## Requirements
 
-    - All Rave CLI samples are run using Node.js ```8.12.0``` or higher. If you haven't yet installed Node.js, you can do so [here](https://nodejs.org).
-    - You obviously need to have a ````Rave Sandbox``` account. You can create one [here](https://rave.flutterwave.com/login?_ga=2.52042537.1235922808.1545914614-813837257.1545375560).
-    - To see the webhook sample in action, you will need to create a [Pusher Account](https://pusher.com/)
-    - Install live-server globally ```npm install -g live-server```
+```
+All Rave CLI samples are run using Node.js ```8.12.0``` or higher. If you haven't yet installed Node.js, you can do so [here](https://nodejs.org).
 
+You obviously need to have a ````Rave Sandbox``` account. You can create one [here](https://rave.flutterwave.com/login?_ga=2.52042537.1235922808.1545914614-813837257.1545375560).
+
+To see the webhook sample in action, you will need to create a [Pusher Account](https://pusher.com/)
+
+Install live-server globally ```npm install -g live-server```
+
+```
 ## Quick Setup Guide
 
 First up is installing the CLI.
@@ -74,7 +79,7 @@ Creating an App can be done entirely locally and they are fairly simple Node.js 
 
 ## Sample Apps folder structure
 
-[Folder Structure](./samples_folder_structure.png)
+![Folder Structure](/samples_folder_structure.png)
 
 ## Creating a sample Transfer App
 
