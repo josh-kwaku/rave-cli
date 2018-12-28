@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Split Payments</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrapper" class="wrapper">
+        <section class="description">
+            <h4>Split Payments - Information</h4>
+            <article class="intro">
+                <p>
+                    This is a Demo to demonstrate Split Payments. Split Payments can be carried out via both the Card API and Account API. <br> Go <a href="https://developer.flutterwave.com/docs/split-payment" target="blank">here</a> to understand how split payments work and how to create subaccounts
+                    <br>
+                    <ul>
+                        <li>In this demo, the amount being charged is NGN5000.</li>
+                        <li>The amount is split like so:</li>
+                        <li>First Subaccount gets NGN1500</li>
+                        <li>Second Subaccount gets NGN2800</li>
+                        <li>The remaining money goes to the merchant's Rave balance</li>
+                    </ul>
+                </p>
+            </article>
+
+            <article class="explanation">
+                <p>
+                    <b>Please Note That:</b> The demo card below is a Mastercard and hence this demo does not demonstrate how to handle VISA cards. Kindly see the CLI documentation on how to handle VISA cards
+                    <br>
+                    <b> Card No: 5399838383838381 |
+                    CVV: 470 |
+                    PIN: 3310 |
+                    Expiry: 10/22 |
+                    OTP: 12345</b>
+                </p>
+            </article>
+            <article class="accountinfo">
+                <p>
+                    Kindly use the account number below. <br>
+                    <b> Account Number: 0690000031 (Access Bank) |
+                    OTP: 12345</b>
+                </p>
+                <p>
+                    Please note that the "Account Name" field has been disabled. We dynamically fetch the account's name using Rave's account resolve API: <b>https://ravesandbox.azurewebsites.net/flwv3-pug/getpaidx/api/resolve_account</b>
+                </p>
+            </article>
+
+            <article class="generalinfo">
+                <p>
+                    In general, we highly recommend that you check out the codebase generated for you to see and understand how split payments work.
+                    <br>
+                    <b> You definitely can reuse any parts of it that you want </b>
+                </p>
+                <br>
+                <p>
+                    We recommend that you edit the code base to use your own<b> sandbox keys</b> and <b> sub account IDs </b> to better understand how money is split between subaccounts
+                </p>
+            </article>
+        </section>
+        <section class="card-api">
+            <h4>Split Payments - Using The Card API</h4>
+            <form id="card-form" method="post">
+                <div class="cardno">
+                        <label for="cardno">Card Number: </label>
+                        <input type="text" name="cardno" id="cardno">
+                </div>
+    
+                <div class="cvv">
+                    <label for="cvv">Cvv: </label>
+                    <input type="text" name="cvv" id="cvv">
+                </div>
+                
+                <div class="expiry">
+                    <label for="expiry">Expiry: </label>
+                    <input type="text" name="expdate" id="expdate">
+                </div>
+
+                <div class="pin">
+                    <label for="pin">Pin: </label>
+                    <input type="text" name="pin" id="pin">
+                </div>
+
+                <button class="pay" id="card-pay" type="submit">Pay</button>
+
+                
+            </form>
+        </section>
+        <section class="account-api">
+            <h4>Split Payments - Using The Account API</h4>
+            <form id="account-form" method="post">
+                <div class="accountnumber">
+                        <label for="accountnumber">Acc Number: </label>
+                        <input type="text" name="accountnumber" id="accountnumber">
+                </div>
+    
+                <div class="accountname">
+                    <label for="accountname">Acc Name: </label>
+                    <input type="text" name="accountname" id="accountname" disabled>
+                </div>
+                
+                <button class="pay" id="account-pay" type="submit">Pay</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="./js/index.js"></script>
+</body>
+</html>

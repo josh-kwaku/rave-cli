@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Slabo 27px', serif;
+}
+
+input {
+    line-height: 28px;
+    outline: none;
+    border: none;
+    opacity: .89;
+    color: #ffffff;
+    letter-spacing: 1.2px;
+    text-indent: 10px;
+    border-radius: 8px;
+    /* box-shadow: 0 2px 6px 0 rgb(24, 23, 21); */
+}
+
+.error {
+    margin-top: 15px;
+    background: #a5391c;
+    color: #fafafa;
+    padding: 15px;
+    width: 100%;
+    border-radius: 6px;
+    /* max-width: 50%; */
+    margin-left: 10px;
+}
+.success {
+    margin-top: 15px;
+    background: #138052;
+    color: #fafafa;
+    padding: 15px;
+    width: auto;
+    border-radius: 6px;
+    max-width: 100%;
+    margin-left: 10px;
+}
+
+.card-api input {
+    background: #a5690b;
+}
+
+.tokencharge input {
+    background: #288484;
+}
+
+button.pay {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #1d255b;
+    background: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+button.pay:hover{
+    background: #1d255b;
+    color: #fafafa
+}
+
+.wrapper {
+    display: flex;
+}
+
+.wrapper section {
+    width: 33.3%;
+    height: auto;
+}
+
+.wrapper section.description {
+    background: #1d255b;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 20px;
+}
+
+.wrapper section.description h4 {
+    color: #fafafa;
+    margin: 0;
+}
+
+.wrapper section.description article {
+    height: auto;
+    padding: 10px;
+    margin-top: 15px;
+    line-height: 25px;
+    border-radius: 3px;
+    opacity: .89;
+    box-shadow: 0 5px 19px 0 #1d2458;
+}
+
+.wrapper section.description > .intro {
+    background: #fafafa;
+    color: rgb(66, 66, 66);
+}
+
+.wrapper section.description > .accountinfo {
+    background: #85671d;
+    color: #372700;
+}
+
+.wrapper section.description > .generalinfo {
+    background: #030826;
+    color: #868fca;
+}
+
+.wrapper section.description > .explanation {
+    background: #575f93;
+    color: #030826;
+}
+
+
+.wrapper section.card-api {
+    background: #EAA844;
+    padding: 20px;
+    color: #fafafa;
+    /* display: flex;
+    flex-flow: column;
+    justify-content: center; */
+
+} 
+
+.wrapper section.card-api h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper section.card-api div {
+    display: flex;
+    padding: 5px;
+}
+
+.wrapper section.card-api div label {
+    width: 30%;
+
+}
+
+.wrapper section.card-api div input {
+    width: 60%;
+}
+
+.wrapper section.tokencharge {
+    background: #6bbebe;
+    padding: 20px;
+    color: #fafafa;
+
+}
+
+.wrapper section.tokencharge h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper section.tokencharge div {
+    display: flex;
+    padding: 5px;
+}
+
+.wrapper section.tokencharge div label {
+    width: 30%;
+}
+
+.wrapper section.tokencharge div input {
+    width: 60%;
+}
+
+.hide {
+    display: none;
+}
+
+.spinner {
+    position: relative;
+    background: #cd6209;
+    height: 3px;
+    animation: spin 2s cubic-bezier(0.075, 0.82, 0.165, 1) .8s infinite normal forwards running;
+}
+
+@keyframes spin {
+    0% {
+        background: #1313f4
+    }
+
+    50% {
+        /* width: 40%; */
+        background: #78d311
+    }
+
+    100% {
+        background: #c609cd
+    }
+
+
+}

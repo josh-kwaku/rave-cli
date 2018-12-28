@@ -1,0 +1,40 @@
+{
+  "name": "rave-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool to help run several sample applications of rave using the nodejs sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "rave": "bin/samples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jake-parkers/rave-cli.git"
+  },
+  "keywords": [
+    "Rave",
+    "Flutterwave",
+    "Payments",
+    "Test"
+  ],
+  "author": "Joshua Boateng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jake-parkers/rave-cli/issues"
+  },
+  "homepage": "https://github.com/Jake-parkers/rave-cli#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "heroku-client": "^3.0.7",
+    "minimist": "^1.2.0",
+    "ravepay": "^1.2.0",
+    "request": "^2.88.0",
+    "simple-git": "^1.107.0"
+  },
+  "devDependencies": {
+    "ora": "^3.0.0"
+  }
+}
