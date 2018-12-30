@@ -32,7 +32,8 @@
     "minimist": "^1.2.0",
     "ravepay": "^1.2.0",
     "request": "^2.88.0",
-    "simple-git": "^1.107.0"
+    "simple-git": "^1.107.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "ora": "^3.0.0"

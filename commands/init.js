@@ -1,6 +1,7 @@
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 const fs = require('fs');
+const uuid = require('uuid/v4');
 const errorHandler = require('../utils/error');
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
@@ -60,7 +61,10 @@ module.exports = (args) => {
 createHerokuApp = (spinner) => {
     try {
         execSync('git init');
-        exec('heroku create rave-3dsecure', (err, stdout, stderr) => {
+        let b = uuid();
+        let command = 'heroku create rave-3dsecure'+b.slice(0, b.indexOf('-'));
+        console.log(command);
+        exec(command, (err, stdout, stderr) => {
             if(err) errorHandler(err+'\n'+stderr, true);
             spinner.succeed('\n'+stdout);
         });

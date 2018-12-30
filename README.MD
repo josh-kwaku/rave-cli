@@ -32,7 +32,7 @@ The CLI and Rave itself are different. The CLI is just a helper to get you start
 
 * All Rave CLI samples are run using Node.js ```8.12.0``` or higher. If you haven't yet installed Node.js, you can do so [here](https://nodejs.org).
 
-* You obviously need to have a ````Rave Sandbox``` account. You can create one [here](https://rave.flutterwave.com/login?_ga=2.52042537.1235922808.1545914614-813837257.1545375560).
+* You obviously need to have a ```Rave Sandbox``` account. You can create one [here](https://rave.flutterwave.com/login?_ga=2.52042537.1235922808.1545914614-813837257.1545375560).
 
 * To see the webhook sample in action, you will need to create a [Pusher Account](https://pusher.com/)
 
@@ -68,6 +68,17 @@ Your CLI should be up and running now. Next we create our first sample app!!
  cd frontend/public && live-server --port=3000
 ```
 You should now have a working local app. Read and follow the instructions on the left of the served up page.
+
+
+# Available Sample Apps
+
+* Transfer (transfer)
+
+* Split Payments (split)
+
+* 3D Secure (3dsecure)
+
+* Tokenized Charge (tokenized)
 
 
 # Creating a Sample App
@@ -117,9 +128,9 @@ The 3dsecure sample app shows you how to handle cards that are eligible for 3dse
 
 3dsecure transactions require redirects back to your payment page after a successful transaction. As such, the 3dsecure sample app also shows you how to handle redirects back to your page.
 
-We have provided guides on the left of the served up HTML page for you to see 3dsecure transactions in action. We ```strongly recommend``` that you read up those instructions so as to be able to get the appropriate account details to use for the test; as well as other vital info.
+We have provided guides on the left of the served up HTML page for you to see 3dsecure transactions in action. We ```strongly recommend``` that you read up those instructions so as to be able to get the appropriate card details to use for the test; as well as other vital info.
 
-*Before you proceed, ensure you've created a [Pusher Account](https://pusher.com/)*
+*Before you proceed, ensure you've created a [Pusher Account](https://pusher.com/) as you will be needing your Pusher keys.*
 
 Creating the app:
 
@@ -155,10 +166,10 @@ To see webhooks in action, follow the [Creating a sample 3dsecure App](#) steps 
  # in your generated 3dsecure sample app folder
  rave init heroku
 
- rave init git https://the-heroku-gitUrl-created-for-you (e.g https://3dsecureRave.git)
+ rave init git https://the-heroku-gitUrl-created-for-you (e.g  https://git.heroku.com/rave-3dsecurexxxxxx.git)
 
 ```
-By now you should be seeing a heroku app url in your console. Copy it and then do the following.
+By now you should be seeing a heroku app url in your console. Copy it, go to your rave dashboard then do the following.
 
 ![Webhook](/webhooks.PNG)
 
@@ -226,9 +237,23 @@ Creating the app:
 ```
 Yay! You should have a sample split payments app all set up now. **A piece of advice: Check out the code to see how it was implemented.**
 
+# NEED HELP?
+
+The CLI has a built in ```help``` command. All you just need do is run the command below:
+
+```
+ rave help
+```
+To get help for a particular command, just specifiy the command name after help like so:
+
+```
+ # help on how to use init command
+ rave help init
+```
+
 ## Meta
 
-Distributed under the MIT license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See ```LICENSE``` for more information.
 
 [Joshua Boateng](https://github.com/Jake-parkers/)
 
