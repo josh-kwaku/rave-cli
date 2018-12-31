@@ -1,5 +1,5 @@
 {
-  "name": "rave-cli",
+  "name": "rave-cli-beta",
   "version": "1.0.0",
   "description": "A CLI tool to help run several sample applications of rave using the nodejs sdk",
   "main": "index.js",
@@ -33,9 +33,7 @@
     "ravepay": "^1.2.0",
     "request": "^2.88.0",
     "simple-git": "^1.107.0",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
+    "uuid": "^3.3.2",
     "ora": "^3.0.0"
   }
 }
