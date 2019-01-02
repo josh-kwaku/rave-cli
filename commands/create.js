@@ -5,6 +5,7 @@ const childProcess = require('child_process');
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
 var appPath;
+let command;
 
 module.exports = (args) => {
 
@@ -30,11 +31,11 @@ module.exports = (args) => {
     switch (os.platform()) {
         case 'win32':
             appPath = path.win32.normalize(path.win32.join(dirname, args['app']));
-            let command = 'Xcopy /E /I ' + appPath + " " + path.win32.normalize(process.cwd());
+            command = 'Xcopy /E /I ' + appPath + " " + path.win32.normalize(process.cwd());
             break;
         default:
             appPath = path.normalize(path.join(dirname, args['app']));
-            let command = 'cp -r ' + appPath + " " + process.cwd();
+            command = 'cp -r ' + appPath + " " + process.cwd();
             break;
     }
     // let appPath = path.normalize(path.join(dirname, args['app']));
