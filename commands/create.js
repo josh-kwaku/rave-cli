@@ -33,7 +33,7 @@ module.exports = (args) => {
         spinner.succeed();
     }catch(err) {
         spinner.fail();
-        errorHandler(`Could not create ${args["app"]} app. See available apps below`, false);
+        errorHandler(`Could not create ${args["app"]} app. See available apps below\n ${err}`, false);
         require('./help')({_:["help", "create"]});
     }
 }
