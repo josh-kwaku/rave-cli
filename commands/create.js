@@ -26,11 +26,21 @@ module.exports = (args) => {
     }).start();
 
     let dirname = __dirname.replace('commands','samples');
-    let appPath = path.join(dirname, args['app']);
-    let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
-    let win32Command = 'Xcopy /E /I ' + appPath + " " + process.cwd();
+    switch (os.platform()) {
+        case 'win32':
+            let appPath = path.win32.normalize(path.win32.join(dirname, args['app']));
+            let command = 'Xcopy /E /I ' + appPath + " " + path.win32.normalize(process.cwd());
+            break;
+        default:
+            let appPath = path.normalize(path.join(dirname, args['app']));
+            let command = 'cp -r ' + appPath + " " + process.cwd();
+            break;
+    }
+    // let appPath = path.normalize(path.join(dirname, args['app']));
+    // let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
+    // let win32Command = 'Xcopy /E /I ' + appPath + " " + process.cwd();
     try {
-        result = childProcess.execSync(os.platform() == 'win32' ? win32Command : unixCommand);
+        result = childProcess.execSync(command);
         spinner.succeed();
     }catch(err) {
         spinner.fail();
