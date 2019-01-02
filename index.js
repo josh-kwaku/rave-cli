@@ -28,39 +28,4 @@ module.exports = () => {
             require('./commands/help')(args);
             break;
     }
-    
-    // if(initiator == "run") {
-    //     // perform wonders here
-    //     switch (command) {
-    //         case "init":
-    //             require('./commands/init')(args)
-    //             break;
-    //         case "start-server":
-    //         console.log(`Rave Sample Apps Running on Port 80`);
-    //             require('./commands/start_script')(args)
-    //             break;
-    //         default:
-    //             errorHandler("Oops!!! Seems like you entered a wrong command", false);
-    //             require('./commands/help')(args);
-    //             break;
-    //     }
-
-    // }else if (initiator == "test") {
-    //     // perform tests here
-    //     console.log("We're about to perform tests");
-
-    // } else if (initiator == "help") {
-
-    //     require('./commands/help')(args);
-
-    // }else if (initiator == "version") {
-
-    //     require('./commands/version')(args);
-
-    // }else {
-
-    //     errorHandler("Oops!!! Seems like you entered a wrong command", false);
-    //     require('./commands/help')(args);
-
-    // }
 }
