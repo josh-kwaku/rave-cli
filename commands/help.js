@@ -27,17 +27,13 @@ const menus = {
 
       --app ............ create a sample app. It can assume any of the following values:
 
-      card, -c ..... create a sample card app
-      
-      account, -a ..... create a sample account app
-
       transfer, -t ..... create a sample transfer app
 
-      webhook, -w ..... create a sample webhook app
-
-      preauth, -p ..... create a sample preauth app
+      3dsecure, -w ..... create a sample 3dsecure app
 
       split, -s ..... create a sample split payments app
+
+      tokenized, -tk ..... create a sample tokenized app
       `,
 }
 

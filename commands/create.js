@@ -27,9 +27,10 @@ module.exports = (args) => {
 
     let dirname = __dirname.replace('commands','samples');
     let appPath = path.join(dirname, args['app']);
-    let command = 'cp -r ' + appPath + " " + process.cwd();
+    let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
+    let win32Command = 'Xcopy /E /I ' + appPath + " " + process.cwd();
     try {
-        result = childProcess.execSync(command);
+        result = childProcess.execSync(os.platform() == 'win32' ? win32Command : unixCommand);
         spinner.succeed();
     }catch(err) {
         spinner.fail();
