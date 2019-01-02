@@ -26,6 +26,7 @@
     "url": "https://github.com/Jake-parkers/rave-cli/issues"
   },
   "homepage": "https://github.com/Jake-parkers/rave-cli#readme",
+  "preferGlobal": true,
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",

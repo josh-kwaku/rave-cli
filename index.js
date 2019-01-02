@@ -13,11 +13,9 @@ module.exports = () => {
             break;
         case 'version':
             require('./commands/version')(args);
+            break;
         case 'create':
             require('./commands/create')(args);
-            break;
-        case 'set':
-            require('./commands/set')(args);
             break;
         case 'init':
             require('./commands/init')(args);

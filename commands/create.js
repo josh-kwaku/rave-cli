@@ -26,7 +26,7 @@ module.exports = (args) => {
     }).start();
 
     let dirname = __dirname.replace('commands','samples');
-    let appPath = path.normalize(path.join(dirname, args['app']));
+    let appPath = path.join(dirname, args['app']);
     let command = 'cp -r ' + appPath + " " + process.cwd();
     try {
         result = childProcess.execSync(command);
