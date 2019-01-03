@@ -32,6 +32,7 @@
     "express": "^4.16.4",
     "heroku-client": "^3.0.7",
     "minimist": "^1.2.0",
+    "ncp": "^2.0.0",
     "ora": "^3.0.0",
     "ravepay": "^1.2.0",
     "recursive-copy": "^2.0.9",

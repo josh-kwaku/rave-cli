@@ -4,7 +4,7 @@ const os = require('os');
 const childProcess = require('child_process');
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
-const copy = require('recursive-copy');
+const copy = require('ncp');
 var appPath;
 let command;
 
