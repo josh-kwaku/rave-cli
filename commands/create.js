@@ -4,6 +4,7 @@ const os = require('os');
 const childProcess = require('child_process');
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
+const copy = require('recursive-copy');
 var appPath;
 let command;
 
@@ -27,23 +28,31 @@ module.exports = (args) => {
         }
     }).start();
 
-    let dirname = __dirname.replace('commands','samples');
-    switch (os.platform()) {
-        case 'win32':
-            appPath = path.win32.normalize(path.win32.join(dirname, args['app']));
-            command = 'Xcopy /E /I ' + appPath + " " + path.win32.normalize(process.cwd());
-            break;
-        default:
-            appPath = path.normalize(path.join(dirname, args['app']));
-            command = 'cp -r ' + appPath + " " + process.cwd();
-            break;
-    }
-    // let appPath = path.normalize(path.join(dirname, args['app']));
-    // let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
-    // let win32Command = 'Xcopy /E /I ' + appPath + " " + process.cwd();
+    // switch (os.platform()) {
+    //     case 'win32':
+    //         appPath = path.win32.normalize(path.win32.join(dirname, args['app']));
+    //         command = 'Xcopy /E /I ' + appPath + " " + path.win32.normalize(process.cwd());
+    //         break;
+    //     default:
+    //         appPath = path.normalize(path.join(dirname, args['app']));
+    //         command = 'cp -r ' + appPath + " " + process.cwd();
+    //         break;
+    // }
     try {
-        result = childProcess.execSync(command);
-        spinner.succeed();
+        let dirname = __dirname.replace('commands','samples');
+        let appPath = path.normalize(path.join(dirname, args['app']));
+        copy(appPath, process.cwd(), function(error, results) {
+            if (error) {
+                console.error('Copy failed: ' + error);
+                spinner.fail();
+            } else {
+                console.info('Copied ' + results.length + ' files');
+                spinner.succeed();
+            }
+        });
+        // let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
+        // let win32Command = 'Xcopy /E /I ' + appPath + " " + process.cwd();
+        // result = childProcess.execSync(command);
     }catch(err) {
         spinner.fail();
         errorHandler(`Could not create ${args["app"]} app. See available apps below\n ${err}`, false);
