@@ -41,12 +41,12 @@ module.exports = (args) => {
     try {
         let dirname = __dirname.replace('commands','samples');
         let appPath = path.normalize(path.join(dirname, args['app']));
-        copy(appPath, process.cwd(), function(error, results) {
+        copy(appPath, process.cwd(), function(error) {
             if (error) {
                 console.error('Copy failed: ' + error);
                 spinner.fail();
             } else {
-                console.info('Copied ' + results.length + ' files');
+                console.info('Copied files');
                 spinner.succeed();
             }
         });
