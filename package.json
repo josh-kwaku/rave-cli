@@ -30,6 +30,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "fs-extra": "^7.0.1",
     "heroku-client": "^3.0.7",
     "minimist": "^1.2.0",
     "ncp": "^2.0.0",

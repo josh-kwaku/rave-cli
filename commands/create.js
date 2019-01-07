@@ -4,7 +4,8 @@ const os = require('os');
 const childProcess = require('child_process');
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
-const copy = require('ncp');
+// const copy = require('ncp');
+const fse = require('fs-extra')
 var appPath;
 let command;
 
@@ -41,7 +42,7 @@ module.exports = (args) => {
     try {
         let dirname = __dirname.replace('commands','samples');
         let appPath = path.normalize(path.join(dirname, args['app']));
-        copy(appPath, process.cwd(), function(error) {
+        fse.copy(appPath, process.cwd(), function(error) {
             if (error) {
                 console.error('Copy failed: ' + error);
                 spinner.fail();
