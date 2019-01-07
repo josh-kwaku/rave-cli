@@ -1,81 +1,100 @@
 var cardPay = document.getElementById('card-pay');
-var tokenPay = document.getElementById('token-pay');
+var accountPay = document.getElementById('account-pay');
+var accountPay2 = document.getElementById('account-pay_2');
 var cardForm = document.getElementById("card-form");
-var tokenForm = document.getElementById("token-form");
+var accountForm = document.getElementById("account-form");
+var accountForm2 = document.getElementById("account-form_2");
+var accountNameField = document.getElementById("accountname");
 var wrapper = document.getElementById("wrapper");
 
 var server_url = 'http://localhost:80/'; // the nodejs server url
 
+var account_resolve_url = 'https://ravesandbox.azurewebsites.net/flwv3-pug/getpaidx/api/resolve_account'; // Rave's account resolver url for sandbox environment (i.e this url resolves only test cards);
 
-cardPay.addEventListener('click', function(e) {
+var accountResolveData = {
+    PBFPubKey: "FLWPUBK-ba0a57153f497c03bf34a9e296aa9439-X", // your public key
+    recipientaccount: "",
+    destbankcode: 0,
+}
+
+accountPay.addEventListener('click', function(e) {
     e.preventDefault();
+
     hideMessages();
     showSpinner(wrapper);
+    var accountData = extractFormValues(accountForm);
+    accountResolveData.recipientaccount = accountData.accountnumber; // set recipient account of the resolve payload
+    accountResolveData.destbankcode = accountData.accountbank; // set bank code of the resolve payload
 
-    // call api
-    var formData = extractFormValues(cardForm);
-    makeRequest('rave/initiatecharge',formData)
+    // first we try to resolve the account number entered to confirm if it's a valid one and also to get the name of the account
+    makeRequest(account_resolve_url,accountResolveData,true)
+        .then(response => {
+            hideSpinner();
+            if(response.data) {
+                accountNameField.value = response.data.data.accountname; // update account name field
+
+                // update the accountData payload to include the amount, account name and account bank
+                accountData.accountbank =  accountData.accountbank;
+                accountData.amount =  accountData.amount;
+                accountData.accountname = accountNameField.value;
+                makeRequest('rave/initiatesingletransfer', accountData, false)
+                    .then(response => {
+                        if(response.status == "error") {
+                            console.log("Error: ", response);
+                            showErrorMessage(response.message, accountPay);
+                            hideSpinner();
+                        }else {
+                            console.log(response);
+                            response = response.data;
+                            if(response.status == "FAILED") { // check for the status of the transfer
+                                showErrorMessage(response.complete_message + ". Seems like the account number you entered doesn't match the bank you chose. Try again", accountPay);
+                                hideSpinner();
+                            }else {
+                                hideSpinner();
+                                showSuccessMessage("Transfer of "+ response.amount +" to " + response.fullname + " was successful", accountPay);
+                                hideSpinner();
+                            }
+                        }
+                    }).catch(error => {
+                        showErrorMessage(error, accountPay);
+                        hideSpinner();
+                    })
+
+                // make the api request to charge the account
+            }
+
+            else showErrorMessage("Could not resolve account with account number "+ accountData.accountnumber +". Ensure the account number is valid", accountPay);
+        }).catch(error => {
+            showErrorMessage("Oops!!! An error occurred error", accountPay);
+        })
+
+});
+
+accountPay2.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    hideMessages();
+    showSpinner(wrapper);
+    var accountData = extractFormValues(accountForm2);
+    console.log(accountData);
+    makeRequest('rave/initiatebulktransfer', accountData, false)
         .then(response => {
             if(response.status == "error") {
+                console.log("Error: ", response);
+                showErrorMessage(response.message, accountPay2);
                 hideSpinner();
-                showErrorMessage(response.message, cardPay);
+            }else {
+                hideSpinner();
+                showSuccessMessage(response.message, accountPay2);
+                hideSpinner();
             }
-            if(response.data.chargeResponseCode == 02){ // a chargeResponseCode of 02 depicts that the transaction needs OTP validation to continue
-                otp = prompt(response.data.chargeResponseMessage);
-                transaction_reference = response.data.flwRef;
-                makeRequest('rave/completecharge', {otp, transaction_reference})
-                    .then(function _(response) {
-                        if(response.data.data.responsecode == 00) {
-                            hideSpinner();
-                            // the card token is accessed here: response.data.tx.chargeToken.embed_token
-                            showSuccessMessage(response.data.data.responsemessage+"<br/>AuthModel: "+response.data.tx.authModelUsed+"<br/>Card Token: "+response.data.tx.chargeToken.embed_token, cardPay);
-                        }else if (response.data.data.responsecode == 'RR') { // the charge failed for the reason contained in // response.data.data.responsemessage
-                            hideSpinner();
-                            showErrorMessage(response.data.data.responsemessage, cardPay)
-                        }else{  // the charge failed for the reason contained in // response.message
-                            hideSpinner();
-                            showErrorMessage(response.message, cardPay)
-                        }
-                    }).catch(function _(error) {
-                        hideSpinner();
-                        showErrorMessage(error, cardPay)
-                    })
-            }
-        }).catch(function _(error) {
-            hideSpinner()
-            showErrorMessage(error, cardPay)
-        })
-});
-
-tokenPay.addEventListener('click', function(e) {
-    e.preventDefault();
-
-    hideMessages();
-    showSpinner(wrapper);
-
-    var tokenData = extractFormValues(tokenForm); // collect token from form. See the extractFormValues function below.
-    
-    makeRequest('rave/chargetokenizedcard', tokenData, false)
-        .then(function _(response) {
-            if(response.status == "success"){
-                showSuccessMessage("Tokenized card charge was successful", tokenPay);
-                hideSpinner()
-            }
-            else { // tokenized card charge failed for reason contained in response.data.message || response.message
-                showErrorMessage(response.data.code + ": "+response.data.message || response.message, tokenPay);
-                hideSpinner()
-            }
-        }).catch(function _(error) {
-            showErrorMessage(JSON.stringify(error),tokenPay);
+        }).catch(error => {
+            showErrorMessage(error, accountPay);
             hideSpinner();
-        })
+        });
 
 });
 
-/**
- * Populates an object with values from the input contained in a form. Using the input name as the object keys
- * @param {*} form html form containing input fields
- */
 function extractFormValues(form) {
     var input_object = {}
     for (let index = 0; index < form.length - 1; index++) {

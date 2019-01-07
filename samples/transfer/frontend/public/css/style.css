@@ -6,7 +6,7 @@
     font-family: 'Slabo 27px', serif;
 }
 
-input {
+input, select {
     line-height: 28px;
     outline: none;
     border: none;
@@ -17,6 +17,7 @@ input {
     border-radius: 8px;
     /* box-shadow: 0 2px 6px 0 rgb(24, 23, 21); */
 }
+
 
 .error {
     margin-top: 15px;
@@ -43,7 +44,7 @@ input {
     background: #a5690b;
 }
 
-.tokencharge input {
+.account-api input {
     background: #288484;
 }
 
@@ -116,6 +117,41 @@ button.pay:hover{
 }
 
 
+.wrapper section.card-api {
+    background: #EAA844;
+    padding: 20px;
+    color: #fafafa;
+    /* display: flex;
+    flex-flow: column;
+    justify-content: center; */
+
+} 
+
+.wrapper section.card-api h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper section.card-api div {
+    display: flex;
+    padding: 5px;
+}
+
+.wrapper section.card-api div label {
+    width: 30%;
+
+}
+
+.wrapper section.card-api div input {
+    width: 60%;
+}
+
+.wrapper section.card-api div select {
+    width: 60%;
+    background: rgb(121, 80, 19);
+    height: 28px;
+}
+
 .wrapper section.account-api {
     background: #6bbebe;
     padding: 20px;
@@ -141,29 +177,10 @@ button.pay:hover{
     width: 60%;
 }
 
-.wrapper section.tokencharge {
-    background: #6bbebe;
-    padding: 20px;
-    color: #fafafa;
-
-}
-
-.wrapper section.tokencharge h4 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.wrapper section.tokencharge div {
-    display: flex;
-    padding: 5px;
-}
-
-.wrapper section.tokencharge div label {
-    width: 30%;
-}
-
-.wrapper section.tokencharge div input {
+.wrapper section.account-api div select {
     width: 60%;
+    background: #1f8e8e;
+    height: 28px;
 }
 
 .hide {

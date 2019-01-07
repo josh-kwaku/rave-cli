@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Split Payments</title>
+    <title>Transfers</title>
 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -11,53 +11,64 @@
 <body>
     <div id="wrapper" class="wrapper">
         <section class="description">
-            <h4>Tokenized Charge - Information</h4>
+            <h4>Transfers - Information</h4>
             <article class="intro">
                 <p>
-                    This is a Demo to demonstrate Tokenized Charges. Tokenized Charges can be carried out on the Card API (i.e) you can only tokenize cards and not account numbers. <br> Go <a href="https://developer.flutterwave.com/v2.0/reference#save-a-card" target="blank">here</a> to read more on how to charge a saved card.
+                    This is a Demo to demonstrate Transfers. Transfers can be carried out via the account api only. <br> Go <a href="https://developer.flutterwave.com/v2.0//docs#how-transfers-work" target="blank">here</a> to read more about transfers
                     <br>
-                    <ul>
-                        <li>In this demo, the amount being charged is NGN5000.</li>
-                        <li>You perform the card charge first.</li>
-                        <li>Once the card charge is successful, copy the card token returned(<b>Please note that in a real world scenario, you're meant to securely save the card token for subsequent charging</b>) and paste in the the card token field.</li>
-                        <li>Charge the Card Token</li>
-                        <li>Review the generated codebase</li>
-                    </ul>
+                    When doing transfers, Please be aware that the money being transferred is the money available in your Rave account (availabe balance).
+                    <br>
+                    A successful transfer is queued to be processed. You can look up the status of a transfer by checking the transfers tab in your Rave dashboard.
                 </p>
             </article>
 
             <article class="explanation">
                 <p>
-                    <b>Please Note That:</b> The demo card below is a Mastercard and hence this demo does not demonstrate how to handle VISA cards. Kindly see the CLI documentation on how to handle VISA cards
+                    <b>Use the following account numbers below.</b>
                     <br>
-                    <b> Card No: 5399838383838381 |
-                    CVV: 470 |
-                    PIN: 3310 |
-                    Expiry: 10/22 |
-                    OTP: 12345</b>
+                    <b> Acc No: 0690000031 |
+                    Bank: Access Bank 
+                    </b>
+                    <br>
+                    <b> Acc No: 5900102340 |
+                    Bank: Providus Bank 
+                    </b>
                 </p>
             </article>
 
             <article class="generalinfo">
                 <p>
-                    In general, we highly recommend that you check out the codebase generated for you to see and understand how tokenized charge works.
+                    In general, we highly recommend that you check out the codebase generated for you to see how transfers can be implemented.
                     <br>
-                    <b> You definitely can reuse any parts of it that you want </b>
+                    <b> Replace the public and secret keys in the .env file to your own <strong>rave sandbox</strong> public and secret keys.</b>
                 </p>
                 <br>
-                <p>
-                    You're free to edit the generated code base to better understand how tokenized charge works
-                </p>
             </article>
         </section>
-        <section class="account-api">
+        <section class="card-api">
             <h4>Split Payments - Using The Account API</h4>
             <form id="account-form" method="post">
-                <div class="accountnumber">
-                        <label for="accountnumber">Acc Number: </label>
-                        <input type="text" name="accountnumber" id="accountnumber">
+
+                <div class="accountbank">
+                    <label for="accountbank">Bank Name: </label>
+                    <select name="accountbank" id="accountbank">
+                        <option value="0">Select Bank</option>
+                        <option value="044">Access Bank</option>
+                        <option value="101">Providus Bank</option>
+                    </select>
+                    <!-- <input type="text" name="accountbank" id="accountbank"> -->
                 </div>
-    
+
+                <div class="accountnumber">
+                    <label for="accountnumber">Acc Number: </label>
+                    <input type="text" name="accountnumber" id="accountnumber">
+                </div>
+
+                <div class="amount">
+                        <label for="amount">Amount: </label>
+                        <input type="text" name="amount" id="amount">
+                </div>
+
                 <div class="accountname">
                     <label for="accountname">Acc Name: </label>
                     <input type="text" name="accountname" id="accountname" disabled>
@@ -66,15 +77,50 @@
                 <button class="pay" id="account-pay" type="submit">Pay</button>
             </form>
         </section>
-        <section class="tokencharge">
-            <h4>Step 2: Charge the saved card token. (Email must be the same)</h4>
-            <form id="token-form" method="post">
-                <div class="token">
-                    <label for="token">Card Token: </label>
-                    <input type="text" name="token" id="token">
+        <section class="account-api">
+            <h4>Split Payments - Using The Account API</h4>
+            <form id="account-form_2" method="post">
+                <div class="accountbank_1">
+                    <label for="accountbank_1">Bank Name: </label>
+                    <select name="accountbank_1" id="accountbank_1">
+                        <option value="0">Select Bank</option>
+                        <option value="044">Access Bank</option>
+                        <option value="101">Providus Bank</option>
+                    </select>
+                    <!-- <input type="text" name="accountbank" id="accountbank"> -->
+                </div>
+
+                <div class="accountnumber_1">
+                    <label for="accountnumber_1">First Recipient: </label>
+                    <input type="text" placeholder="0011983728" name="accountnumber_1" id="accountnumber_1">
+                </div>
+
+                <div class="amount_1">
+                    <label for="amount_1">Amount: </label>
+                    <input type="text" placeholder="1000" name="amount_1" id="amount_1">
+                </div>
+
+                <div class="accountbank_2">
+                    <label for="accountbank_2">Bank Name: </label>
+                    <select name="accountbank_2" id="accountbank_2">
+                        <option value="0">Select Bank</option>
+                        <option value="044">Access Bank</option>
+                        <option value="101">Providus Bank</option>
+                    </select>
+                    <!-- <input type="text" name="accountbank" id="accountbank"> -->
+                </div>
+
+                <div class="accountnumber_2">
+                    <label for="accountnumber_2">2nd Recipient: </label>
+                    <input type="text" placeholder="0011983728" name="accountnumber_2" id="accountnumber_2">
+                </div>
+
+                <div class="amount_2">
+                    <label for="amount_2">Amount: </label>
+                    <input type="text" placeholder="2000" name="amount_2" id="amount_2">
                 </div>
                 
-                <button class="pay" id="token-pay" type="submit">Pay</button>
+                <button class="pay" id="account-pay_2" type="submit">Pay</button>
             </form>
         </section>
     </div>

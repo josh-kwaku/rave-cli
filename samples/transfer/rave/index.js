@@ -4,82 +4,73 @@ const logger = require('heroku-logger');
 var rave = new Ravepay(process.env.RAVE_PUBLIC_KEY, process.env.RAVE_SECRET_KEY, false); // get public and secret keys from environment variables stored in the .env file.
 const util = require('util');
 
-var cardPaymentObject = {
+var singleTransferObject = {
+    "narration": "New transfer",
     "currency": "NGN",
-    "country": "NG",
-    "amount": "10",
-    "suggested_auth": "pin",
-    "email": "kwakujosh@gmail.com",
-    "phonenumber": "09093146022",
-    "firstname": "Joshua",
-    "lastname": "Boateng",
-    "IP": "355426087298442",
-    "txRef": "MC-" + Date.now(),// your unique merchant reference
-    "meta": [{metaname: "flightID", metavalue: "123949494DC"}],
-    "redirect_url": "https://your-redirect-url.com/redirect",
-    "device_fingerprint": "69e6b7f0b72037aa8428b70fbe03986c",
+    "reference": Date.now() + "-" + new Date().getUTCSeconds() // unique reference
 }
 
-
+var bulkTransferObject = {
+    "title":"May Staff Salary",
+  "bulk_data":[
+  	{
+        "account_bank":"",
+        "account_number": "",
+        "amount": 0,
+        "currency":"NGN",
+        "narration":"Your salary",
+        "reference": Date.now() + "-" + new Date().getUTCSeconds() // unique reference
+    },
+    {
+        "account_bank":"",
+        "account_number": "",
+        "amount": 0,
+        "currency":"NGN",
+        "narration":"Your salary",
+        "reference": Date.now() + "-" + new Date().getUTCSeconds() // unique reference
+    }
+  ]
+}
 router.get('/', (req, res) => {
     console.log("Here's the rave route");
     res.json({message: "Here's the rave route"});
 });
 
+router.post('/initiatesingletransfer', (req, res) => {
 
-router.post('/initiatecharge', (req, res) => {
-    var { cardno, expdate, cvv, pin } = req.body;
+    var { accountnumber, accountname, amount, accountbank } = req.body;
+    singleTransferObject.account_number = accountnumber;
+    singleTransferObject.amount = amount;
+    singleTransferObject.account_bank = accountbank;
 
-    // update payload
-    cardPaymentObject.cardno = cardno;
-    cardPaymentObject.cvv = cvv;
-    cardPaymentObject.pin = pin;
-    cardPaymentObject.expirymonth = expdate.split('/')[0];
-    cardPaymentObject.expiryyear = expdate.split('/')[1];
-
-    logger.info(JSON.stringify(cardPaymentObject));
-    rave.Card.charge(cardPaymentObject)
-        .then((response) => {
-            logger.info(JSON.stringify(response));
-            res.json(response)
-        })
-        .catch((error) => {
-            logger.error(error)
-            res.json(error)
-        })
-});
-
-router.post('/chargetokenizedcard', (req, res) =>  {
-    var { token } = req.body;
-    cardPaymentObject.token = token;
-    logger.info(cardPaymentObject);
-    rave.TokenCharge.card(cardPaymentObject)
-        .then((response) => {
-            // console.log(response)
-            res.json(response)
-        }).catch(error => {
-            // console.log(error)
-            res.json(error)
-        })
-});
-
-router.post('/completecharge', (req,res) => {
-    var { transaction_reference, transactionreference, otp } = req.body;
-
-    // perform card charge validation
-    rave.Card.validate({
-        transaction_reference,
-        otp
-    }).then((response) => {
-        console.log(response)
+    rave.Transfer.initiate(singleTransferObject).then(response => {
+        logger.info(util.inspect(response));
         res.json(response)
     }).catch(error => {
-        console.log(error)
-        res.json(error)
-    })
-    
+        logger.error(error);
+        res.json(error);
+    });
+});
+
+router.post('/initiatebulktransfer', (req, res) => {
+    let { accountbank_1, accountnumber_1, amount_1, accountbank_2, accountnumber_2, amount_2 } = req.body;
+
+    // update payload
+    bulkTransferObject.bulk_data[0].account_bank = accountbank_1; 
+    bulkTransferObject.bulk_data[0].amount = amount_1; 
+    bulkTransferObject.bulk_data[0].account_number = accountnumber_1;
+
+    bulkTransferObject.bulk_data[1].account_bank = accountbank_2; 
+    bulkTransferObject.bulk_data[1].amount = amount_2; 
+    bulkTransferObject.bulk_data[1].account_number = accountnumber_2; 
+
+    rave.Transfer.bulk(bulkTransferObject).then(response => {
+        logger.info(util.inspect(response));
+        res.json(response)
+    }).catch(error => {
+        logger.error(error);
+        res.json(error);
+    });
 })
-
-
 
 module.exports = router;
