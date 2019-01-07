@@ -1,6 +1,6 @@
 const errorHandler = require('../utils/error');
 const path = require('path')
-const childProcess = require('child_process').execSync;
+const execSync = require('child_process').execSync;
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
 // const copy = require('ncp');
