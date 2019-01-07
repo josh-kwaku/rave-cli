@@ -23,6 +23,9 @@ module.exports = () => {
         case 'set':
             require('./commands/set')(args);
             break;
+        case 'remove':
+            require('./commands/remove')(args);
+            break;
         case 'test':
             console.log("We're about to perform tests");
             break;

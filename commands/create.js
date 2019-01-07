@@ -3,7 +3,8 @@ const path = require('path')
 const execSync = require('child_process').execSync;
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
-const fse = require('fs-extra')
+const fse = require('fs-extra');
+const os = require('os');
 
 module.exports = (args) => {
 
@@ -29,7 +30,7 @@ module.exports = (args) => {
         let dirname = __dirname.replace('commands','samples');
         let appPath = path.normalize(path.join(dirname, args['app']));
         let copyPath = path.normalize(process.cwd()+"/"+args['app']);
-        execSync('mkdir '+copyPath + ' && cd ' +copyPath);
+        execSync('mkdir '+copyPath);
         fse.copy(appPath, copyPath, function(error) {
             if (error) {
                 console.error('Copy failed: ' + error);
@@ -38,12 +39,19 @@ module.exports = (args) => {
                 spinner.succeed('Project copied');
             }
         });
-        // let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
-        // let win32Command = 'Xcopy /E /I ' + appPath + " " + process.cwd();
-        // result = childProcess.execSync(command);
     }catch(err) {
         spinner.fail();
         errorHandler(`Could not create ${args["app"]} app. See available apps below\n ${err}`, false);
         require('./help')({_:["help", "create"]});
+    }
+
+    try {
+        // store project path in a temp directory to aid removal
+        let store_command = os.platform() == 'win32' ? path.normalize('C:/Windows/Temp') : path.normalize('/var/temp');
+        let fd = fse.openSync(store_command + '/.store','w');
+        console.log(process.cwd());
+        fse.writeSync(fd, 'sample_apps_dir='+ process.cwd() +"\n");
+    }catch(error) {
+        console.log("");
     }
 }
