@@ -1,7 +1,6 @@
 const errorHandler = require('../utils/error');
 const path = require('path')
-const os = require('os');
-const childProcess = require('child_process');
+const childProcess = require('child_process').execSync;
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
 // const copy = require('ncp');
@@ -42,7 +41,9 @@ module.exports = (args) => {
     try {
         let dirname = __dirname.replace('commands','samples');
         let appPath = path.normalize(path.join(dirname, args['app']));
-        fse.copy(appPath, process.cwd(), function(error) {
+        let copyPath = process.cwd()+"/"+args['app']
+        execSync('mkdir '+copyPath + ' && cd ' +copyPath);
+        fse.copy(appPath, '.', function(error) {
             if (error) {
                 console.error('Copy failed: ' + error);
                 spinner.fail();
