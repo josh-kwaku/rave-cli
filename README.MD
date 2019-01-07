@@ -56,7 +56,9 @@ Your CLI should be up and running now. Next we create our first sample app!!
  # move into the newly created directory
  cd transfer
 
- # open the .env file and put in your Rave Sandbox public and secret keys
+ # open the .env file and put in your Rave Sandbox public and secret keys or set your keys like so:
+ rave set --SANDBOX_SECRET_KEY
+ rave set --SANDBOX_PUBLIC_KEY
 
  # install all the libraries needed
  npm install
@@ -109,7 +111,9 @@ Creating the app:
  # generate the transfer app
  rave create --app transfer
 
- # open the .env file and put in your ```Rave Sandbox``` public and secret keys
+ # open the .env file and put in your ```Rave Sandbox``` public and secret keys or set your keys like so:
+ rave set --SANDBOX_SECRET_KEY
+ rave set --SANDBOX_PUBLIC_KEY
 
  # install all the libraries needed
  npm install

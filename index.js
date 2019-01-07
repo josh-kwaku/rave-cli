@@ -20,6 +20,9 @@ module.exports = () => {
         case 'init':
             require('./commands/init')(args);
             break;
+        case 'set':
+            require('./commands/set')(args);
+            break;
         case 'test':
             console.log("We're about to perform tests");
             break;

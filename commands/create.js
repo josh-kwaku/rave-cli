@@ -3,10 +3,7 @@ const path = require('path')
 const execSync = require('child_process').execSync;
 const Spinner = require('ora');
 const randomColor = require('../utils/random');
-// const copy = require('ncp');
 const fse = require('fs-extra')
-var appPath;
-let command;
 
 module.exports = (args) => {
 
@@ -28,16 +25,6 @@ module.exports = (args) => {
         }
     }).start();
 
-    // switch (os.platform()) {
-    //     case 'win32':
-    //         appPath = path.win32.normalize(path.win32.join(dirname, args['app']));
-    //         command = 'Xcopy /E /I ' + appPath + " " + path.win32.normalize(process.cwd());
-    //         break;
-    //     default:
-    //         appPath = path.normalize(path.join(dirname, args['app']));
-    //         command = 'cp -r ' + appPath + " " + process.cwd();
-    //         break;
-    // }
     try {
         let dirname = __dirname.replace('commands','samples');
         let appPath = path.normalize(path.join(dirname, args['app']));
@@ -48,8 +35,7 @@ module.exports = (args) => {
                 console.error('Copy failed: ' + error);
                 spinner.fail();
             } else {
-                console.info('Copied files');
-                spinner.succeed();
+                spinner.succeed('Project copied');
             }
         });
         // let unixCommand = 'cp -r ' + appPath + " " + process.cwd();
