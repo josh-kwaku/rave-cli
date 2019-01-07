@@ -1,6 +1,6 @@
 {
   "name": "rave-cli-beta",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "A CLI tool to help run several sample applications of rave using the nodejs sdk",
   "main": "index.js",
   "scripts": {
