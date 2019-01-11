@@ -45,7 +45,7 @@ First up is installing the CLI.
 
 ```
  # install the CLI globally
- npm install -g rave-cli
+ npm install -g rave-cli-beta
 ```
 Your CLI should be up and running now. Next we create our first sample app!!
 

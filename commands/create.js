@@ -30,7 +30,7 @@ module.exports = (args) => {
         let dirname = __dirname.replace('commands','samples');
         let appPath = path.normalize(path.join(dirname, args['app']));
         let copyPath = path.normalize(process.cwd()+"/"+args['app']);
-        execSync('mkdir '+copyPath);
+        // execSync('mkdir '+copyPath);
         fse.copy(appPath, copyPath, function(error) {
             if (error) {
                 console.error('Copy failed: ' + error);
