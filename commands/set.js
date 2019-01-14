@@ -24,7 +24,7 @@ module.exports = (args) => {
             }).start();
             if(!answer["RAVE_PUBLIC_KEY"]) errorHandler('Please enter your rave public key');
             let fd = fs.openSync(process.cwd() + '/.env','a');
-            let bytesWritten = fs.writeSync(fd, 'RAVE_PUBLIC_KEY='+answer["RAVE_PUBLIC_KEY"]+"\n");
+            let bytesWritten = fs.writeSync(fd, '\nRAVE_PUBLIC_KEY='+answer["RAVE_PUBLIC_KEY"]+"\n");
             if(bytesWritten) spinner.succeed('SANDBOX_PUBLIC_KEY SET');
             else spinner.fail();
         });
@@ -44,7 +44,7 @@ module.exports = (args) => {
             }).start();
             if(!answer["RAVE_SECRET_KEY"]) errorHandler('Please enter your rave public key');
             let fd = fs.openSync(process.cwd() + '/.env','a');
-            let bytesWritten = fs.writeSync(fd, 'RAVE_SECRET_KEY='+answer["RAVE_SECRET_KEY"]+"\n");
+            let bytesWritten = fs.writeSync(fd, '\nRAVE_SECRET_KEY='+answer["RAVE_SECRET_KEY"]+"\n");
             if(bytesWritten) spinner.succeed('SANDBOX_SECRET_KEY SET');
             else spinner.fail();
         });

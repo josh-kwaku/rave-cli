@@ -25,7 +25,7 @@ var cardPaymentObject = {
     "IP": "355426087298442",
     "txRef": "MC-" + Date.now(),// your unique merchant reference
     "meta": [{metaname: "flightID", metavalue: "123949494DC"}],
-    "redirect_url": "https://rave-3dsecure.herokuapp.com/rave/redirect", // set redirect url to the /redirect sub-route of our rave route
+    "redirect_url": "http://localhost:80/rave/redirect", // set redirect url to the /redirect sub-route of our rave route
     "device_fingerprint": "69e6b7f0b72037aa8428b70fbe03986c",
 }
 
